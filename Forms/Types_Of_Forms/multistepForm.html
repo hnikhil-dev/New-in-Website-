@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-container {
+            width: 100%;
+            background: #e0e0e0;
+            border-radius: 25px;
+            height: 10px;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 10px;
+            background: #4caf50;
+            border-radius: 25px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .success-message {
+            text-align: center;
+            color: #4caf50;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Multi-Step Form with Progress Bar</h2>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Step 1 -->
+        <form id="multiStepForm">
+            <div class="form-step active">
+                <label for="fname">First Name:</label>
+                <input type="text" id="fname" name="fname" required>
+
+                <label for="lname">Last Name:</label>
+                <input type="text" id="lname" name="lname" required>
+
+                <div class="btn-container">
+                    <button type="button" onclick="nextStep(1)">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="form-step">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <div class="btn-container">
+                    <button type="button" onclick="prevStep(0)">Previous</button>
+                    <button type="button" onclick="nextStep(2)">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="form-step">
+                <label for="country">Country:</label>
+                <select id="country" name="country" required>
+                    <option value="India">India</option>
+                    <option value="USA">USA</option>
+                    <option value="UK">UK</option>
+                    <option value="Canada">Canada</option>
+                </select>
+
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+
+                <div class="btn-container">
+                    <button type="button" onclick="prevStep(1)">Previous</button>
+                    <button type="submit">Submit</button>
+                </div>
+            </div>
+
+            <div id="successMessage" class="success-message" style="display: none;">
+                ✅ Form submitted successfully!
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const formSteps = document.querySelectorAll('.form-step');
+        const progressBar = document.getElementById('progressBar');
+        const totalSteps = formSteps.length;
+
+        function showStep(step) {
+            formSteps.forEach((stepDiv, index) => {
+                stepDiv.classList.remove('active');
+                if (index === step) {
+                    stepDiv.classList.add('active');
+                }
+            });
+
+            // Update Progress Bar
+            progressBar.style.width = ((step) / (totalSteps - 1)) * 100 + '%';
+        }
+
+        function nextStep(step) {
+            if (validateForm()) {
+                currentStep = step;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep(step) {
+            currentStep = step;
+            showStep(currentStep);
+        }
+
+        function validateForm() {
+            const activeStep = formSteps[currentStep];
+            const inputs = activeStep.querySelectorAll('input, select');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!input.checkValidity()) {
+                    isValid = false;
+                    input.reportValidity();
+                }
+            });
+
+            return isValid;
+        }
+
+        // Form Submission
+        document.getElementById('multiStepForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            document.getElementById('successMessage').style.display = 'block';
+        });
+
+        // Initial display
+        showStep(currentStep);
+    </script>
+
+</body>
+
+</html>

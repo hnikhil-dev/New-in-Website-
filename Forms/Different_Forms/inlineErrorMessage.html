@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Form with Inline Error Messages</h2>
+        <form id="errorForm">
+            <input type="text" id="username" placeholder="Username" />
+            <div id="usernameError" class="error"></div>
+            <input type="email" id="email" placeholder="Email" />
+            <div id="emailError" class="error"></div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('errorForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            let isValid = true;
+
+            document.getElementById('usernameError').innerText = '';
+            document.getElementById('emailError').innerText = '';
+
+            if (username === '') {
+                document.getElementById('usernameError').innerText = 'Username is required!';
+                isValid = false;
+            }
+
+            if (!email.match(/^[^@]+@\w+(\.\w+)+\w$/)) {
+                document.getElementById('emailError').innerText = 'Enter a valid email!';
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert('Form Submitted Successfully!');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

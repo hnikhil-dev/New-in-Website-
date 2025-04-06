@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+    overflow-x: hidden;
+    height: 200vh;
+}
+
+section {
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: revealText 1.2s ease-out forwards;
+}
+
+h1.reveal {
+    animation-delay: 0.2s;
+}
+
+p.reveal {
+    animation-delay: 0.5s;
+}
+
+h2.reveal {
+    animation-delay: 1s;
+}
+
+@keyframes revealText {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

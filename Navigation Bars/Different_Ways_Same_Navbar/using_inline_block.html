@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* Global Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar Container */
+        .navbar {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+        }
+
+        /* Logo */
+        .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            list-style-type: none;
+            display: grid;
+            grid-template-columns: repeat(5, auto);
+            gap: 15px;
+            justify-content: end;
+        }
+
+        .nav-links li {
+            display: inline-block;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            padding: 12px 20px;
+            display: block;
+        }
+
+        .nav-links a:hover {
+            background-color: #575757;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Container -->
+    <div class="navbar">
+        <!-- Logo -->
+        <a href="#" class="logo">MY SITE</a>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* Global Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar Container */
+        .navbar {
+            background-color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Logo */
+        .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* Navbar Links */
+        .nav-links {
+            list-style-type: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            padding: 12px 20px;
+            display: block;
+        }
+
+        .nav-links a:hover {
+            background-color: #575757;
+        }
+
+        /* Mega Menu Container */
+        .mega-menu {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            width: 1100px;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 999;
+        }
+
+        /* Mega Menu Content */
+        .mega-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 20px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Mega Menu Columns */
+        .mega-column {
+            width: 25%;
+            padding: 10px;
+            min-width: 200px;
+        }
+
+        .mega-column h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .mega-column a {
+            text-decoration: none;
+            color: #555;
+            padding: 8px 0;
+            display: block;
+        }
+
+        .mega-column a:hover {
+            color: #4caf50;
+        }
+
+        /* Show Mega Menu on Hover */
+        .nav-links li:hover .mega-menu {
+            display: block;
+        }
+
+        /* Dropdown Button */
+        .dropdown-btn {
+            cursor: pointer;
+        }
+
+        /* Mobile Menu Button */
+        .menu-btn {
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+                background-color: #333;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .mega-menu {
+                position: relative;
+                width: 100%;
+            }
+
+            .mega-content {
+                flex-direction: column;
+            }
+
+            .mega-column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Container -->
+    <div class="navbar">
+        <!-- Logo -->
+        <a href="#" class="logo">MY SITE</a>
+
+        <!-- Mobile Menu Button -->
+        <span class="menu-btn" onclick="toggleMenu()">☰</span>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+
+            <!-- Mega Menu Trigger -->
+            <li class="dropdown-btn">
+                <a href="#">Services ▾</a>
+
+                <!-- Mega Menu Content -->
+                <div class="mega-menu">
+                    <div class="mega-content">
+                        <!-- Column 1 -->
+                        <div class="mega-column">
+                            <h3>Web Services</h3>
+                            <a href="#">Web Design</a>
+                            <a href="#">Web Development</a>
+                            <a href="#">SEO Optimization</a>
+                            <a href="#">App Development</a>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div class="mega-column">
+                            <h3>Marketing</h3>
+                            <a href="#">Email Marketing</a>
+                            <a href="#">Social Media Ads</a>
+                            <a href="#">Brand Strategy</a>
+                            <a href="#">Lead Generation</a>
+                        </div>
+
+                        <!-- Column 3 -->
+                        <div class="mega-column">
+                            <h3>Promotions</h3>
+                            <a href="#">Discounts</a>
+                            <a href="#">Special Offers</a>
+                            <a href="#">Referral Programs</a>
+                            <a href="#">Partnerships</a>
+                        </div>
+
+                        <!-- Column 4 -->
+                        <div class="mega-column">
+                            <h3>Advanced</h3>
+                            <a href="#">AI Solutions</a>
+                            <a href="#">Data Analytics</a>
+                            <a href="#">Custom Tools</a>
+                            <a href="#">Cybersecurity</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+
+</body>
+
+</html>

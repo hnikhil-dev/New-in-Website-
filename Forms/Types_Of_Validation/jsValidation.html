@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 400px;
+            margin: 100px auto;
+        }
+
+        form {
+            background: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <form id="myForm" onsubmit="return validateForm()">
+            <input type="text" id="username" placeholder="Username">
+            <span id="usernameError" class="error"></span>
+
+            <input type="email" id="email" placeholder="Email">
+            <span id="emailError" class="error"></span>
+
+            <input type="password" id="password" placeholder="Password">
+            <span id="passwordError" class="error"></span>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let valid = true;
+
+            // Username
+            const username = document.getElementById('username').value;
+            if (username === "") {
+                document.getElementById('usernameError').innerText = "Username is required.";
+                valid = false;
+            } else {
+                document.getElementById('usernameError').innerText = "";
+            }
+
+            // Email
+            const email = document.getElementById('email').value;
+            if (email === "") {
+                document.getElementById('emailError').innerText = "Email is required.";
+                valid = false;
+            } else {
+                document.getElementById('emailError').innerText = "";
+            }
+
+            // Password
+            const password = document.getElementById('password').value;
+            if (password === "" || password.length < 6) {
+                document.getElementById('passwordError').innerText = "Password must be at least 6 characters.";
+                valid = false;
+            } else {
+                document.getElementById('passwordError').innerText = "";
+            }
+
+            return valid;
+        }
+    </script>
+
+</body>
+
+</html>

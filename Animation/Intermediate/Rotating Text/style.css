@@ -1,0 +1,92 @@
+/* Basic Setup */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #121212;
+    overflow: hidden;
+}
+
+/* Fixed Container Setup */
+.container {
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+/* Fixed Box with Rotating Text */
+.text-box {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+/* Rotating Text Only */
+.text-rotate {
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: rotateText 8s linear infinite;
+}
+
+/* Individual Texts Positioned Perfectly */
+.text-rotate span {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #4caf50;
+    text-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+    text-align: center;
+    line-height: 50px;
+    transform-origin: center center -150px;
+}
+
+/* Fixed Positions - Perfect Alignment */
+.text-rotate span:nth-child(1) {
+    transform: rotateY(0deg) translateZ(150px);
+}
+
+.text-rotate span:nth-child(2) {
+    transform: rotateY(90deg) translateZ(150px);
+}
+
+.text-rotate span:nth-child(3) {
+    transform: rotateY(180deg) translateZ(150px);
+}
+
+.text-rotate span:nth-child(4) {
+    transform: rotateY(270deg) translateZ(150px);
+}
+
+/* Keyframe for Rotating Text Only (Box Fixed) */
+@keyframes rotateText {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    25% {
+        transform: rotateY(-90deg);
+    }
+
+    50% {
+        transform: rotateY(-180deg);
+    }
+
+    75% {
+        transform: rotateY(-270deg);
+    }
+
+    100% {
+        transform: rotateY(-360deg);
+    }
+}

@@ -1,0 +1,31 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #0f172a;
+}
+
+/* Button Styles */
+.glow-btn {
+    padding: 15px 40px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #1e293b;
+    border: 2px solid #38bdf8;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    transition: 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.glow-btn:hover {
+    box-shadow: 0 0 20px #38bdf8;
+    background-color: #1e40af;
+    transform: scale(1.1);
+}

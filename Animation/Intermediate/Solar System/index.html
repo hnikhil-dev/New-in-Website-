@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="solar-system" id="solar-system">
+        <div class="sun"></div>
+    </div>
+    <div class="info-box" id="info-box">Hover over a planet to see details.</div>
+
+    <script>
+        const planets = [
+            { name: 'Mercury', color: '#aaa', size: 8, distance: 40, period: 88, initialAngle: Math.random() * 360 },
+            { name: 'Venus', color: '#f4a', size: 12, distance: 70, period: 225, initialAngle: Math.random() * 360 },
+            { name: 'Earth', color: '#4af', size: 14, distance: 100, period: 365, initialAngle: Math.random() * 360 },
+            { name: 'Mars', color: '#fa4', size: 10, distance: 150, period: 687, initialAngle: Math.random() * 360 },
+            { name: 'Jupiter', color: '#ffa500', size: 30, distance: 250, period: 4332, initialAngle: Math.random() * 360 },
+            { name: 'Saturn', color: '#d2b48c', size: 26, distance: 350, period: 10759, initialAngle: Math.random() * 360 },
+            { name: 'Uranus', color: '#7fffd4', size: 20, distance: 450, period: 30685, initialAngle: Math.random() * 360 },
+            { name: 'Neptune', color: '#4169e1', size: 18, distance: 550, period: 60190, initialAngle: Math.random() * 360 }
+        ];
+
+        const solarSystem = document.getElementById('solar-system');
+        const infoBox = document.getElementById('info-box');
+
+        planets.forEach(planet => {
+            // Create Orbit
+            const orbit = document.createElement('div');
+            orbit.classList.add('orbit');
+            orbit.style.width = `${planet.distance * 2}px`;
+            orbit.style.height = `${planet.distance * 2}px`;
+            solarSystem.appendChild(orbit);
+
+            // Create Planet
+            const planetElement = document.createElement('div');
+            planetElement.classList.add('planet');
+            planetElement.style.width = `${planet.size}px`;
+            planetElement.style.height = `${planet.size}px`;
+            planetElement.style.backgroundColor = planet.color;
+            planetElement.dataset.name = planet.name;
+
+            solarSystem.appendChild(planetElement);
+
+            // Info on hover
+            planetElement.addEventListener('mouseover', () => {
+                infoBox.innerText = `${planet.name} - Size: ${planet.size}px, Orbit Period: ${planet.period} days`;
+            });
+
+            planetElement.addEventListener('mouseout', () => {
+                infoBox.innerText = 'Hover over a planet to see details.';
+            });
+
+            // Initial Starting Angle in Radians
+            let startAngle = (planet.initialAngle * Math.PI) / 180;
+
+            // Animate Orbit (Slowed Down by 10x)
+            function animatePlanet(time) {
+                const angle = startAngle + (time / (planet.period * 10)) * 2 * Math.PI;
+                const x = Math.cos(angle) * planet.distance;
+                const y = Math.sin(angle) * planet.distance;
+
+                planetElement.style.left = `calc(50% + ${x}px - ${planet.size / 2}px)`;
+                planetElement.style.top = `calc(50% + ${y}px - ${planet.size / 2}px)`;
+
+                requestAnimationFrame(animatePlanet);
+            }
+
+            requestAnimationFrame(animatePlanet);
+        });
+    </script>
+</body>
+
+</html>

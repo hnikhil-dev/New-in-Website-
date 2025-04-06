@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 400px;
+            margin: 100px auto;
+        }
+
+        form {
+            background: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <form>
+            <input type="text" id="username" placeholder="Username">
+            <span id="usernameError"></span>
+
+            <input type="email" id="email" placeholder="Email">
+            <span id="emailError"></span>
+
+            <input type="password" id="password" placeholder="Password">
+            <span id="passwordError"></span>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('username').addEventListener('input', function () {
+            const username = this.value;
+            if (username.length >= 3) {
+                document.getElementById('usernameError').innerHTML = "<span class='success'>Valid</span>";
+            } else {
+                document.getElementById('usernameError').innerHTML = "<span class='error'>Username too short</span>";
+            }
+        });
+
+        document.getElementById('email').addEventListener('input', function () {
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (emailRegex.test(this.value)) {
+                document.getElementById('emailError').innerHTML = "<span class='success'>Valid</span>";
+            } else {
+                document.getElementById('emailError').innerHTML = "<span class='error'>Invalid email</span>";
+            }
+        });
+
+        document.getElementById('password').addEventListener('input', function () {
+            if (this.value.length >= 6) {
+                document.getElementById('passwordError').innerHTML = "<span class='success'>Strong</span>";
+            } else {
+                document.getElementById('passwordError').innerHTML = "<span class='error'>Too short</span>";
+            }
+        });
+    </script>
+
+</body>
+
+</html>

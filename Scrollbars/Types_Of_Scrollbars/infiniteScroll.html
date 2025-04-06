@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Page Wrapper */
+        .wrapper {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        /* Heading */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Container for Infinite Scroll */
+        .content-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Individual Content Box */
+        .content-box {
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #e9e9e9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Loading Indicator */
+        #loading {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Page Wrapper -->
+    <div class="wrapper">
+
+        <!-- Page Heading -->
+        <h1>Infinite Scroll Activated</h1>
+
+        <!-- Content Container -->
+        <div class="content-container" id="content-container">
+            <!-- Initial Content with Extra Items to Allow Scrolling -->
+            <div class="content-box">Content Box 1</div>
+            <div class="content-box">Content Box 2</div>
+            <div class="content-box">Content Box 3</div>
+            <div class="content-box">Content Box 4</div>
+            <div class="content-box">Content Box 5</div>
+            <div class="content-box">Content Box 6</div>
+            <div class="content-box">Content Box 7</div>
+            <div class="content-box">Content Box 8</div>
+            <div class="content-box">Content Box 9</div>
+            <div class="content-box">Content Box 10</div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading">Loading more content...</div>
+    </div>
+
+    <script>
+        let contentCount = 10; // Initial content count
+        const contentContainer = document.getElementById("content-container");
+        const loadingIndicator = document.getElementById("loading");
+
+        // Add New Content Dynamically
+        function loadMoreContent() {
+            for (let i = 0; i < 3; i++) {
+                contentCount++;
+                const newBox = document.createElement("div");
+                newBox.className = "content-box";
+                newBox.innerHTML = `Content Box ${contentCount}`;
+                contentContainer.appendChild(newBox);
+            }
+        }
+
+        // Infinite Scroll Logic
+        contentContainer.onscroll = function () {
+            // Check if user is near the bottom of the container
+            if (contentContainer.scrollHeight - contentContainer.scrollTop <= contentContainer.clientHeight + 50) {
+                loadingIndicator.style.display = "block";
+
+                // Simulate loading delay
+                setTimeout(() => {
+                    loadMoreContent();
+                    loadingIndicator.style.display = "none";
+                }, 1000);
+            }
+        };
+    </script>
+
+</body>
+
+</html>

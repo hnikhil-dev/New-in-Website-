@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        #captcha {
+            font-size: 20px;
+            letter-spacing: 3px;
+            background: #eee;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Form with Captcha</h2>
+        <form id="captchaForm">
+            <input type="text" id="username" placeholder="Enter your username" required />
+            <input type="password" id="password" placeholder="Enter your password" required />
+            <div id="captcha"></div>
+            <input type="text" id="captchaInput" placeholder="Enter Captcha" required />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        let captcha;
+
+        function generateCaptcha() {
+            captcha = Math.random().toString(36).substring(2, 8);
+            document.getElementById('captcha').innerText = captcha;
+        }
+
+        document.getElementById('captchaForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const userInput = document.getElementById('captchaInput').value;
+
+            if (userInput === captcha) {
+                alert('Captcha Verified! Form Submitted Successfully.');
+            } else {
+                alert('Invalid Captcha. Please try again.');
+                generateCaptcha();
+            }
+        });
+
+        generateCaptcha();
+    </script>
+
+</body>
+
+</html>

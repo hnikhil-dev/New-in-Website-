@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 400px;
+            margin: 100px auto;
+        }
+
+        form {
+            background: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <form id="regexForm" onsubmit="return validateForm()">
+            <input type="text" id="username" placeholder="Username (alphanumeric)">
+            <span id="usernameError" class="error"></span>
+
+            <input type="email" id="email" placeholder="Valid Email">
+            <span id="emailError" class="error"></span>
+
+            <input type="password" id="password" placeholder="Password (6+ characters)">
+            <span id="passwordError" class="error"></span>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let valid = true;
+
+            // Username Regex
+            const username = document.getElementById('username').value;
+            const usernameRegex = /^[a-zA-Z0-9]+$/;
+            if (!usernameRegex.test(username)) {
+                document.getElementById('usernameError').innerText = "Username must be alphanumeric.";
+                valid = false;
+            } else {
+                document.getElementById('usernameError').innerText = "";
+            }
+
+            // Email Regex
+            const email = document.getElementById('email').value;
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('emailError').innerText = "Enter a valid email.";
+                valid = false;
+            } else {
+                document.getElementById('emailError').innerText = "";
+            }
+
+            // Password Regex
+            const password = document.getElementById('password').value;
+            if (password.length < 6) {
+                document.getElementById('passwordError').innerText = "Password must be 6+ characters.";
+                valid = false;
+            } else {
+                document.getElementById('passwordError').innerText = "";
+            }
+
+            return valid;
+        }
+    </script>
+
+</body>
+
+</html>

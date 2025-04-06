@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #282c36;
+}
+
+.container {
+    width: 400px;
+    height: 300px;
+    position: relative;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    background-color: #1e90ff;
+    overflow: hidden;
+}
+
+.ball {
+    width: 40px;
+    height: 40px;
+    background-color: #ff4757;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 4s infinite ease-in-out, fall 4s infinite ease-in-out;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        top: 10px;
+        height: 40px;
+        animation-timing-function: ease-in;
+    }
+
+    50% {
+        top: 240px;
+        height: 38px;
+        animation-timing-function: ease-out;
+    }
+}
+
+@keyframes fall {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    100% {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+}

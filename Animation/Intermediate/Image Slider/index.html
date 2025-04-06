@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Infinite Image Slider</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0d1c2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            will-change: transform;
+        }
+
+        .slide {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 400px;
+            margin: 0 10px;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="slider-wrapper" id="slider">
+            <div class="slide"><img src="nature.png" alt="Nature"></div>
+            <div class="slide"><img src="ocean.jpg" alt="Ocean"></div>
+            <div class="slide"><img src="mountain.jpg" alt="Mountain"></div>
+            <div class="slide"><img src="forest.jpg" alt="Forest"></div>
+            <div class="slide"><img src="city.jpg" alt="City"></div>
+        </div>
+    </div>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.slide');
+        const slideWidth = slides[0].offsetWidth + 20; // Slide width + margin
+        let index = 0;
+
+        // Clone the slides for seamless transition
+        slides.forEach(slide => {
+            const clone = slide.cloneNode(true);
+            slider.appendChild(clone);
+        });
+
+        function moveSlider() {
+            index++;
+            slider.style.transition = 'transform 0.5s ease-in-out';
+            slider.style.transform = `translateX(-${index * slideWidth}px)`;
+
+            // Smoothly reset to first slide after cloning
+            if (index === slides.length) {
+                setTimeout(() => {
+                    slider.style.transition = 'none';
+                    slider.style.transform = 'translateX(0)';
+                    index = 0;
+                }, 500); // Wait for transition to complete before reset
+            }
+        }
+
+        setInterval(moveSlider, 2000); // Change image every 2 seconds
+    </script>
+
+</body>
+
+</html>

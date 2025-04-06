@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            height: 200vh;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        /* Scrollbar Hidden by Default */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track - Transparent */
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* Thumb - Hidden by Default */
+        ::-webkit-scrollbar-thumb {
+            background: rgba(136, 136, 136, 0);
+            /* Initially invisible */
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        /* Thumb - On Hover or Active */
+        body:hover::-webkit-scrollbar-thumb,
+        body.active-scroll::-webkit-scrollbar-thumb {
+            background: rgba(136, 136, 136, 0.7);
+            /* Appears on hover/scroll */
+        }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background: rgba(85, 85, 85, 0.9);
+            /* Darker on hover */
+        }
+
+        /* Content Styles */
+        .content {
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="content">
+        <h2>Auto-Hiding Scrollbar</h2>
+        <p>Scroll down to see the auto-hiding scrollbar in action.</p>
+        <p>This scrollbar is applied globally to the entire document.</p>
+        <p>The scrollbar automatically appears when you start scrolling and hides after 2 seconds of inactivity.</p>
+        <p>Hovering over the page will also reveal the scrollbar.</p>
+        <p>Try scrolling and waiting to observe the hiding effect.</p>
+    </div>
+
+    <div class="content">
+        <h3>Additional Content</h3>
+        <p>More content to test the global auto-hiding scrollbar.</p>
+    </div>
+
+    <script>
+        let timeout;
+
+        // Detect scrolling and show scrollbar temporarily
+        document.addEventListener('scroll', function () {
+            document.body.classList.add('active-scroll');
+
+            // Hide scrollbar after 2 seconds of inactivity
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                document.body.classList.remove('active-scroll');
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>

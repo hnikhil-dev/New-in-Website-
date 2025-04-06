@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* Global Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar Container */
+        .navbar {
+            background-color: #333;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            z-index: 999;
+        }
+
+        /* Logo */
+        .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* Navbar Links */
+        .nav-links {
+            list-style-type: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0 12px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            padding: 8px 16px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: #4caf50;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        /* Mobile Menu Button */
+        .menu-btn {
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Responsive Navbar Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #444;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                z-index: 100;
+                animation: slideDown 0.3s ease-out;
+            }
+
+            /* Slide Down Animation */
+            @keyframes slideDown {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .nav-links li {
+                text-align: center;
+                margin: 0;
+                border-bottom: 1px solid #555;
+            }
+
+            .nav-links a {
+                padding: 14px;
+                display: block;
+                transition: background-color 0.3s;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+        }
+
+        /* Main Content */
+        .content {
+            padding: 40px 20px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar" onclick="event.stopPropagation()">
+        <!-- Logo -->
+        <a href="#" class="logo">MY SITE</a>
+
+        <!-- Menu Button for Mobile -->
+        <span class="menu-btn" onclick="toggleMenu()">☰</span>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#" onclick="navigate()">Home</a></li>
+            <li><a href="#" onclick="navigate()">About</a></li>
+            <li><a href="#" onclick="navigate()">Services</a></li>
+            <li><a href="#" onclick="navigate()">Portfolio</a></li>
+            <li><a href="#" onclick="navigate()">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content" onclick="closeMenu()">
+        <h1>Welcome to My Site</h1>
+        <p>This is a fully responsive, modern, and clean navigation bar with perfect UI.</p>
+    </div>
+
+    <script>
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            var navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('show');
+        }
+
+        // Close Menu when Clicking Outside
+        function closeMenu() {
+            var navLinks = document.getElementById('navLinks');
+            if (navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show');
+            }
+        }
+
+        // Close Menu and Navigate when Clicking Links
+        function navigate() {
+            closeMenu();
+        }
+
+        // Hide Menu when Clicking Outside on Mobile
+        document.addEventListener('click', function (event) {
+            var navLinks = document.getElementById('navLinks');
+            if (navLinks.classList.contains('show') && !event.target.closest('.navbar')) {
+                closeMenu();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

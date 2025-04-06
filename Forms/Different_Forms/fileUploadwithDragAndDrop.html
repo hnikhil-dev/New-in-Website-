@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #drop-area {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            background: #f9f9f9;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        #drop-area.hover {
+            border-color: #4caf50;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        #file-list {
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #upload-btn {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Drag & Drop File Upload</h2>
+        <div id="drop-area">
+            <p>Drag & Drop files here or click to upload</p>
+            <input type="file" id="fileInput" multiple />
+        </div>
+        <div id="file-list"></div>
+        <button id="upload-btn" onclick="uploadFiles()">Upload Files</button>
+    </div>
+
+    <script>
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('file-list');
+        const uploadBtn = document.getElementById('upload-btn');
+
+        let selectedFiles = [];
+
+        // Show file name after selection
+        function handleFiles(files) {
+            fileList.innerHTML = '';
+            selectedFiles = Array.from(files);
+            selectedFiles.forEach(file => {
+                fileList.innerHTML += `<p>${file.name} - ${(file.size / 1024).toFixed(2)} KB</p>`;
+            });
+
+            if (selectedFiles.length > 0) {
+                uploadBtn.style.display = 'block';
+            } else {
+                uploadBtn.style.display = 'none';
+            }
+        }
+
+        dropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropArea.classList.add('hover');
+        });
+
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.classList.remove('hover');
+        });
+
+        dropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropArea.classList.remove('hover');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        dropArea.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+        // Upload Files (Simulated)
+        function uploadFiles() {
+            if (selectedFiles.length > 0) {
+                alert(`${selectedFiles.length} file(s) uploaded successfully!`);
+                fileList.innerHTML = '';
+                uploadBtn.style.display = 'none';
+                selectedFiles = [];
+            } else {
+                alert('No files selected for upload!');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
